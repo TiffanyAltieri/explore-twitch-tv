@@ -11,6 +11,8 @@
   const currentPageNumber = document.getElementById("currentPageNumber");
   const totalPageNumber = document.getElementById("totalPageNumber");
 
+  const errorDialog = document.getElementById("errorDialog");
+
   const twitchAPIUrl = `https://api.twitch.tv/kraken/search/streams`;
   const clientId = `client_id=xrxvaomni2i1rkoj3h879yqirsegit`;
 
@@ -21,26 +23,40 @@
   //keep track of state of query
   let newRender = true;
 
-
   // Sorts between error and whether first time through
   function handleResults(response) {
     // Check for error in response
     if (response.error) {
       handleErrorResponse(response);
     } else {
-      twitchLinks = response._links;
+      if(response._total > 0) {
+        twitchLinks = response._links;
 
-      // Do only on first time
-      if (currentPage === 1 && newRender) {
-        handleNav(response._total, response.streams.length);
-        setHandlers();
-        showNav();
+        // Do only on first time
+        if (currentPage === 1 && newRender) {
+          handleNav(response._total, response.streams.length);
+          setHandlers();
+          removeWelcomeMessage();
+          showNav();
 
-        newRender = false;
+          newRender = false;
+        }
+
+        // Successful run
+        removeErrorMessage();
+        handleStreams(response.streams);
+      } else {
+        removeWelcomeMessage();
+        handleErrorResponse({ status: 'No results found.', error: "Bummer.", message: "Try again?" });
       }
-
-      handleStreams(response.streams);
     }
+  }
+
+  // Welcome message only shown the first time in
+  function removeWelcomeMessage() {
+    let welcomeMessage = document.getElementById("welcome");
+    welcomeMessage.classList.add("hide-welcome");
+    welcomeMessage.classList.remove("show-welcome");
   }
 
   // Set handlers on the previous and next buttons
@@ -49,7 +65,7 @@
     streamsNextPage.addEventListener("click", showNextStreams, false);
   }
 
-  // Set total
+  // Set the total number of streams
   function setStreamTotal(total){
     // Clear total
     if(streamsTotalText.firstChild) {
@@ -59,6 +75,7 @@
     streamsTotalText.appendChild(totalStreams);
   }
 
+  // Set the total number of pages
   function setTotalPageNumber(){
     // Clear total
     if(totalPageNumber.firstChild) {
@@ -77,6 +94,7 @@
     currentPageNumber.appendChild(currentPages);
   }
 
+  // When left arrow is clicked, call to show the previous streams
   function showPreviousStreams() {
     if (currentPage >= 2) {
       let query = makeNewQuery(twitchLinks.prev);
@@ -89,6 +107,7 @@
     }
   }
 
+  // When right arrow is clicked, call to show the next streams
   function showNextStreams() {
     if (currentPage < totalPages) {
       let query = makeNewQuery(twitchLinks.next);
@@ -101,13 +120,19 @@
     }
   }
 
+  // Given the name of a stream, create the full URL for use in a JSONP call to twitch.tv
   function createFullUrl(stream) {
     return `${twitchAPIUrl}?callback=handleResults&${clientId}&q=${encodeURIComponent(stream)}`;
   }
 
-  function handleErrorResponse(errorResponse) {
-    const errorDialog = document.getElementById("errorDialog");
+  // remove out any old error messages
+  function removeErrorMessage(){
+    errorDialog.classList.add('hide-error-dialog');
+    errorDialog.classList.remove('show-error-dialog');
+  }
 
+  // Handle error response: status, error ans message passed in via object
+  function handleErrorResponse(errorResponse) {
     let errorWrapper = document.createElement('div');
     errorWrapper.classList.add('error-wrapper');
 
@@ -152,20 +177,26 @@
     twitchScript.parentNode.removeChild(twitchScript);
   }
 
-  // Sets initial paginatiion (n/N)
+  // Sets initial pagination (n/N)
   function setPagination(total, streamLength) {
     // Set total number of pages here
     totalPages = Math.ceil(total / streamLength);
 
-    setPageNumber();
-    setTotalPageNumber();
+    if (Number.isInteger(totalPages)){
+      setPageNumber();
+      setTotalPageNumber();
+    }
+
+    return false;
   }
 
+  // Fill in navigation including total number of streas and then pagination
   function handleNav(total, streamLength) {
     setStreamTotal(total);
     setPagination(total, streamLength);
   }
 
+  // Decide if streams are valid.
   function handleStreams(streams){
     // Ensure there are streams to display
       if (streams.length !== 0){

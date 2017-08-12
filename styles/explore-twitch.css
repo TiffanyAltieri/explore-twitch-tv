@@ -77,6 +77,21 @@ main {
   font-size: 14px;
 }
 
+.welcome {
+  font-size: 36px;
+  height: 50%;
+  left: 25%;
+  overflow: hidden;
+  position: fixed;
+  top: 25%;
+  width: 50%;
+  z-index: 150;
+}
+
+.hide-welcome {
+  display: none;
+}
+
 /* Nav */
 .streams-nav {
   display: flex;
@@ -115,11 +130,12 @@ main {
 
 .nav-arrow {
   border: 2px solid #3f3f3f;
+  cursor: pointer;
   font-size: 20px;
-  margin: 0 5px;
-  width: 20px;
   height: 25px;
+  margin: 0 5px;
   text-align: center;
+  width: 20px;
 }
 
 .nav-arrow i {
