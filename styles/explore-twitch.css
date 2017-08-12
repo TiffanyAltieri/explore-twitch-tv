@@ -1,0 +1,231 @@
+html,body {
+  background-color: #efefef;
+  color: #3f3f3f;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 62.5%;
+  font-weight: 300;
+}
+
+p { margin: 0; }
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+a, a:link, a:visited { color: #333; text-decoration: none; }
+a:hover{ color: #6441A5; }
+strong { font-weight: 400; }
+header, section, footer { font-size: 2.5em; }
+
+header {
+  background-color: #fff;
+  border-bottom: 8px solid #3f3f3f;
+  color: #666;
+  padding: 50px;
+}
+
+.twitch-query-form {
+  line-height: 24px;
+}
+
+.twitch-query-form label {
+  font-size: 28px;
+}
+
+.twitch-query-form input {
+  background-color: transparent;
+  border-bottom: 1px solid #666;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  color: #333;
+  padding: 10px;
+  font-style: italic;
+}
+
+.twitch-logo {
+  vertical-align: middle;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: #333;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #333;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #333;
+  opacity: 1;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: #333;
+  opacity: 1;
+}
+
+.twitch-svg-wrapper {
+  display: inline-block;
+  padding: 0 10px;
+  vertical-align: middle;
+}
+
+.twitch-search-button {
+  background-color: transparent;
+  border: none;
+  color: #3f3f3f;
+  font-size: 24px;
+  margin-left: 10px;
+  outline: none;
+}
+
+main {
+  font-size: 14px;
+}
+
+/* Nav */
+.streams-nav {
+  display: flex;
+  padding: 20px;
+  width: 100%;
+
+  -webkit-transition: opacity .3s ease-in;
+  -moz-transition: opacity .3s ease-in;
+  -o-transition: opacity .3s ease-in;
+  transition: opacity .3s ease-in;
+}
+
+.hide-nav {
+  opacity: 0;
+}
+
+.show-nav {
+  opacity: 1;
+}
+
+.streams-total {
+  flex: 1 1 auto;
+  font-size: 20px;
+}
+
+.streams-pager {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.streams-pagination {
+  display: flex;
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.nav-arrow {
+  border: 2px solid #3f3f3f;
+  font-size: 20px;
+  margin: 0 5px;
+  width: 20px;
+  height: 25px;
+  text-align: center;
+}
+
+.nav-arrow i {
+  vertical-align: top;
+}
+
+.twitch-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Single Stream */
+.twitch-stream {
+  margin: 10px;
+}
+
+.twitch-stream-link {
+  align-items: flex-start;
+  display: flex;
+  padding: 10px;
+}
+
+.twitch-stream-link:hover {
+  background-color: #ccc;
+  color: #3f3f3f;
+}
+
+.stream-image-wrapper {
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+  border-radius: 2px;
+  padding: 8px;
+}
+
+.stream-image {
+  background-position: center;
+  background-size: cover;
+  display: inline-block;
+  height: 105px;
+  width: 105px;
+}
+
+.stream-info-wrapper {
+  margin: 0 20px;
+}
+
+.stream-name {
+  font-size: 24px;
+  font-weight: 200;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.stream-stats {
+  list-style: none;
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+.stream-stats li {
+  display: inline-block;
+}
+
+.stream-stats-game-name:after {
+  content: "-";
+  display: inline-block;
+  margin: 0 5px;
+}
+
+/* Error dialog */
+.error-dialog {
+  background-color: rgba(190, 50, 50, 0.9);
+  height: 50%;
+  left: 25%;
+  overflow: hidden;
+  position: fixed;
+  top: 25%;
+  width: 50%;
+  z-index: 150;
+}
+
+.hide-error-dialog {
+  display: none;
+}
+
+.show-error-dialog {
+  display: block;
+}
+
+.error-wrapper {
+  height: 100%;
+  padding: 30px;
+  width: 100%;
+}
+
+.error-header {
+  color: #fff;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.error-inner {
+  align-items: center;
+  color: #efefef;
+  display: flex;
+  font-size: 18px;
+  width: 100%;
+}

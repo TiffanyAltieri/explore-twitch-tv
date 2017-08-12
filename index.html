@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Explore Twitch TV!</title>
+    <link rel="stylesheet" href="./styles/explore-twitch.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="./styles/normalize.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:200,300,400">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
+  </head>
+  <body>
+    <header>
+      <form id="twitchQueryForm" class="twitch-query-form">
+        <label for="twitch-stream">
+          <span class="twitch-svg-wrapper">
+            <svg
+               width="102"
+               height="34"
+               viewBox="0 0 454.93066 150.776"
+               class="twitch-logo">
+              <g
+                 id="g3363"
+                 transform="matrix(1.3333333,0,0,-1.3333333,-180.53426,805.80838)">
+                <g
+                   id="g3371"
+                   transform="translate(468.8057,565.3643)">
+                  <path
+                     d="m 0,0 -13.646,13.645 -25.35,0 0,17.55 -21.451,0 0,-79.94 21.451,0 0,40.947 17.545,0 0,-40.947 21.451,0 L 0,0 Z m -68.241,13.645 -33.146,0 L -115.036,0 l 0,-35.094 13.649,-13.651 33.146,0 0,21.445 -25.35,0 0,19.502 25.35,0 0,21.443 z m -54.594,0 -17.545,0 0,17.55 -21.451,0 0,-66.289 13.649,-13.651 25.347,0 0,21.445 -17.545,0 0,19.502 17.545,0 0,21.443 z m -46.795,17.55 -21.445,0 0,-9.752 21.445,0 0,9.752 z m 0,-17.55 -21.445,0 0,-62.389 21.445,0 0,62.389 z m -29.244,0 -21.447,0 0,-40.945 -7.797,0 0,40.945 -21.448,0 0,-40.945 -7.796,0 0,40.945 -21.451,0 0,-62.39 66.293,0 13.646,13.651 0,48.739 z m -87.738,0 -17.546,0 0,17.55 -21.447,0 0,-66.289 13.648,-13.651 25.345,0 0,21.445 -17.546,0 0,19.502 17.546,0 0,21.443 z M 7.793,3.9 l 0,-58.491 -29.244,-19.499 -19.496,0 0,9.752 -13.648,-9.752 -17.545,0 0,9.752 -9.746,-9.752 -31.197,0 -9.752,9.752 -1.952,-9.752 -27.292,0 -11.161,9.752 -0.625,-9.752 -30.935,0 -1.094,9.752 -8.374,-9.752 -47.25,0 -9.75,3.9 0,-3.9 -25.344,0 -29.247,17.552 -17.546,17.539 0,77.991 37.047,0 17.545,-17.549 79.939,0 0,17.549 66.29,0 0,-17.549 17.548,0 0,-9.746 9.752,9.746 19.493,0 17.55,17.549 37.044,0 0,-17.549 21.448,0 L 7.793,3.9 Z"
+                     style="fill:#3f3f3f;fill-opacity:1;fill-rule:evenodd;stroke:none"
+                     id="path3373" />
+                </g>
+              </g>
+            </svg>
+            :
+        </span>
+        </label>
+        <input id="twitchSearchInput" type="text" placeholder="Enter a stream name...">
+        <button class="twitch-search-button" type="submit" form="twitchQueryForm" id="twitchSearchButton">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </header>
+    <main>
+      <nav class="streams-nav hide-nav" id="streamsNav">
+        <div class="streams-total">
+          <span class="streams-total-label">Total results:</span>
+          <span class="streams-total-text" id="streamsTotalText"></span>
+        </div>
+        <div class="streams-pagination">
+          <span class="nav-arrow nav-arrow-left" id="streamsPreviousPage">
+            <i class="fa fa-angle-left"></i>
+          </span>
+          <div class="streams-pager" id="streamsPager">
+            <span class="current-page-number" id="currentPageNumber"></span>
+            /
+            <span class="total-page-number" id="totalPageNumber"></span>
+          </div>
+          <span class="nav-arrow nav-arrow-right" id="streamsNextPage">
+            <i class="fa fa-angle-right"></i>
+          </span>
+        </div>
+      </nav>
+      <ul class="twitch-results" id="twitchResults"></ul>
+    </main>
+    <!-- error handler -->
+    <div role="dialog" id="errorDialog" class="error-dialog hide-error-dialog"></div>
+    <script type="text/javascript">
+      function deferUntilLoaded() {
+        var element = document.createElement("script");
+        element.src = "./js/explore-streams.js";
+        document.body.appendChild(element);
+      }
+
+      if (window.addEventListener) {
+        window.addEventListener("load", deferUntilLoaded, false);
+      } else if (window.attachEvent) {
+        window.attachEvent("onload", deferUntilLoaded);
+      } else {
+        window.onload = deferUntilLoaded;
+      }
+    </script>
+  </body>
+</html>
