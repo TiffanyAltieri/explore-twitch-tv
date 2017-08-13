@@ -66,7 +66,7 @@
   }
 
   // Set the total number of streams
-  function setStreamTotal(total){
+  function setStreamTotal(total) {
     // Clear total
     if(streamsTotalText.firstChild) {
       streamsTotalText.removeChild(streamsTotalText.firstChild);
@@ -76,7 +76,7 @@
   }
 
   // Set the total number of pages
-  function setTotalPageNumber(){
+  function setTotalPageNumber() {
     // Clear total
     if(totalPageNumber.firstChild) {
       totalPageNumber.removeChild(totalPageNumber.firstChild);
@@ -85,7 +85,8 @@
     totalPageNumber.appendChild(totalPagesText);
   }
 
-  function setPageNumber(){
+  // Set new current page number
+  function setPageNumber() {
     // Clear page number
     if(currentPageNumber.firstChild) {
       currentPageNumber.removeChild(currentPageNumber.firstChild);
@@ -94,15 +95,52 @@
     currentPageNumber.appendChild(currentPages);
   }
 
+  // Enable previous button when current page > 1
+  function enablePreviousButton() {
+    if(streamsPreviousPage.classList.contains('disable-arrow')) {
+      streamsPreviousPage.classList.remove("disable-arrow");
+    }
+  }
+
+  // Disable previous button when current page = 1
+  function disablePreviousButton() {
+    if(!streamsPreviousPage.classList.contains('disable-arrow')) {
+      streamsPreviousPage.classList.add("disable-arrow");
+    }
+  }
+
+  // Enable next button when current page < total pages
+  function enableNextButton() {
+    if(streamsNextPage.classList.contains('disable-arrow')) {
+      streamsNextPage.classList.remove("disable-arrow");
+    }
+  }
+
+  // Disable next button when current page = total pages
+  function disableNextButton() {
+    if(!streamsNextPage.classList.contains('disable-arrow')) {
+      streamsNextPage.classList.add("disable-arrow");
+    }
+  }
+
   // When left arrow is clicked, call to show the previous streams
   function showPreviousStreams() {
     if (currentPage >= 2) {
+      enableNextButton();
+
       let query = makeNewQuery(twitchLinks.prev);
       //re-query twitch
       queryTwitch(query);
 
       // Set current page back
       currentPage--;
+
+      // Calculate whether to enable/disable previous button
+      if (currentPage === 1) {
+        disablePreviousButton();
+      } else {
+        enablePreviousButton();
+      }
       setPageNumber();
     }
   }
@@ -110,12 +148,21 @@
   // When right arrow is clicked, call to show the next streams
   function showNextStreams() {
     if (currentPage < totalPages) {
+      enablePreviousButton();
+
       let query = makeNewQuery(twitchLinks.next);
       //re-query twitch
       queryTwitch(query);
 
       // Set current page forward
       currentPage++;
+
+      // Calculate whether to enable/disable next button
+      if (currentPage === totalPages) {
+        disableNextButton();
+      } else {
+        enableNextButton();
+      }
       setPageNumber();
     }
   }
@@ -274,7 +321,6 @@
 
   // Fill in empty template for a single stream
   function fillSingleStreamTemplate (stream, data) {
-    console.log(data);
     // Fill in template // // // // //
     stream.itemLink.setAttribute("href", data.channel.url);
     stream.image.style.backgroundImage = `url(${data.preview.medium})`;
@@ -336,6 +382,7 @@
     // Set page back to initial
     newRender = true;
     currentPage = 1;
+    disablePreviousButton();
     totalPages;
 
     // get inputted value the first time around

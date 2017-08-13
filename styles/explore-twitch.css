@@ -138,6 +138,11 @@ main {
   width: 20px;
 }
 
+.disable-arrow {
+  opacity: .4;
+  cursor: default;
+}
+
 .nav-arrow i {
   vertical-align: top;
 }
