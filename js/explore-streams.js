@@ -48,6 +48,7 @@
         removeErrorMessage();
         handleStreams(response.streams);
       } else {
+        hideSpinner();
         removeWelcomeMessage();
         handleErrorResponse({ status: 'No results found.', error: "Bummer.", message: "Try again?" });
       }
@@ -262,10 +263,10 @@
   // Decide if streams are valid.
   function handleStreams(streams){
     // Ensure there are streams to display
-      if (streams.length !== 0){
-        hideSpinner();
-        createStreamsList(streams);
-      }
+    if (streams.length !== 0){
+      createStreamsList(streams);
+    }
+    hideSpinner();
   }
 
   // Remove underscores
