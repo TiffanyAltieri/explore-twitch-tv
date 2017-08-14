@@ -9,7 +9,7 @@ I wanted to cover the basics of how I code. I am very big into the readability o
 These make correctly dilineating space far easier and assist with accesibility
 
 **Lots of classes** -
-Sometimes alongside same name ids, but I use fewer ids. I try to give each element its own descriptive class to defin what it is better. Classes are used only by the CSS, while Ids are used by Javascript.
+Sometimes alongside same name ids, but I use fewer ids. I try to give each element its own descriptive class to defin what it is better. Classes are used only by the CSS, while Ids are used by Javascript. This is also why classes use dashes, while ids are camel case.
 
 **One element per line** -
 To keep the markup clean, I reserve only one line per element.  It makes adding more material easy, and it is an easy rule to remember, rather than a subjective rule that has a developer chose when to break to a new line.

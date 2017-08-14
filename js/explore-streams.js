@@ -13,6 +13,8 @@
 
   const errorDialog = document.getElementById("errorDialog");
 
+  const spinnerWrapper = document.getElementById("spinnerWrapper");
+
   const twitchAPIUrl = `https://api.twitch.tv/kraken/search/streams`;
   const clientId = `client_id=xrxvaomni2i1rkoj3h879yqirsegit`;
 
@@ -52,7 +54,20 @@
     }
   }
 
+  // Show spinner
+  function showSpinner() {
+    spinnerWrapper.classList.remove("hide-spinner");
+    spinnerWrapper.classList.add("show-spinner");
+  }
+
+  // Hide spinner
+  function hideSpinner() {
+    spinnerWrapper.classList.add("hide-spinner");
+    spinnerWrapper.classList.remove("show-spinner");
+  }
+
   // Welcome message only shown the first time in
+  // Because of the one time use, welcome message is not declared up top
   function removeWelcomeMessage() {
     let welcomeMessage = document.getElementById("welcome");
     welcomeMessage.classList.add("hide-welcome");
@@ -215,6 +230,7 @@
 
   // Add script, then remove
   function queryTwitch(query) {
+    showSpinner();
     // Make script tag and append to head
     let twitchScript = document.createElement('script');
     twitchScript.setAttribute('src', query);
@@ -247,7 +263,7 @@
   function handleStreams(streams){
     // Ensure there are streams to display
       if (streams.length !== 0){
-        let twitchResultContainer = document.getElementById("twitchResults");
+        hideSpinner();
         createStreamsList(streams);
       }
   }

@@ -1,3 +1,4 @@
+/* START: For Normalize */
 html,body {
   background-color: #efefef;
   color: #3f3f3f;
@@ -12,7 +13,9 @@ a, a:link, a:visited { color: #333; text-decoration: none; }
 a:hover{ color: #6441A5; }
 strong { font-weight: 400; }
 header, section, footer { font-size: 2.5em; }
+/* END: For Normalize */
 
+/* START: Header*/
 header {
   background-color: #fff;
   border-bottom: 8px solid #3f3f3f;
@@ -108,18 +111,21 @@ header {
 .twitch-search-button:focus {
   color: #ccc;
 }
+/* END: Header */
 
+/* START: Main */
 main {
   font-size: 14px;
 }
 
+/* MAIN: Welcome message */
 .welcome {
   font-size: 36px;
   height: 50%;
   left: 25%;
   overflow: hidden;
   position: fixed;
-  top: 25%;
+  top: 200px;
   width: 50%;
   z-index: 150;
 }
@@ -128,16 +134,16 @@ main {
   display: none;
 }
 
-/* Nav */
+/* MAIN: Nav */
 .streams-nav {
   display: flex;
   padding: 20px;
   width: 100%;
 
   -webkit-transition: opacity .3s ease-in;
-  -moz-transition: opacity .3s ease-in;
-  -o-transition: opacity .3s ease-in;
-  transition: opacity .3s ease-in;
+     -moz-transition: opacity .3s ease-in;
+       -o-transition: opacity .3s ease-in;
+          transition: opacity .3s ease-in;
 }
 
 .hide-nav {
@@ -148,6 +154,7 @@ main {
   opacity: 1;
 }
 
+/* MAIN: Streams */
 .streams-total {
   flex: 1 1 auto;
   font-size: 20px;
@@ -164,32 +171,12 @@ main {
   text-align: right;
 }
 
-.nav-arrow {
-  border: 2px solid #3f3f3f;
-  cursor: pointer;
-  font-size: 20px;
-  height: 25px;
-  margin: 0 5px;
-  text-align: center;
-  width: 20px;
-}
-
-.disable-arrow {
-  cursor: default;
-  opacity: .4;
-}
-
-.nav-arrow i {
-  vertical-align: top;
-}
-
 .twitch-results {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* Single Stream */
 .twitch-stream {
   margin: 10px;
 }
@@ -203,6 +190,7 @@ main {
 .twitch-stream-link:hover {
   background-color: #ccc;
   color: #3f3f3f;
+  transform: translate(1px, 1px);
 }
 
 .stream-image-wrapper {
@@ -247,7 +235,27 @@ main {
   margin: 0 5px;
 }
 
-/* Error dialog */
+/* MAIN: Pagination */
+.nav-arrow {
+  border: 2px solid #3f3f3f;
+  cursor: pointer;
+  font-size: 20px;
+  height: 25px;
+  margin: 0 5px;
+  text-align: center;
+  width: 20px;
+}
+
+.disable-arrow {
+  cursor: default;
+  opacity: .4;
+}
+
+.nav-arrow i {
+  vertical-align: top;
+}
+
+/* MAIN: Error dialog */
 .error-dialog {
   background-color: rgba(190, 50, 50, 0.9);
   height: 50%;
@@ -286,3 +294,97 @@ main {
   font-size: 18px;
   width: 100%;
 }
+
+/* MAIN: Spinner */
+.spinner-wrapper {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+}
+.spinner {
+  bottom: 50%;
+  left: 50%;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+}
+
+.hide-spinner {
+  display: none;
+}
+
+.show-spinner {
+  display: block;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+
+.spinner .path {
+  stroke: #3f3f3f;
+  stroke-dasharray: 180;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite;
+}
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 180;
+  }
+  50% {
+    stroke-dashoffset: 45;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 180;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 180;
+  }
+  50% {
+    stroke-dashoffset: 45;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 180;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+/* END: Main */
